@@ -12,7 +12,6 @@ gem 'pry'
 gem 'bcrypt'
 gem "tux"
 gem 'nokogiri'
-gem 'open-uri'
 
 group :test do
   gem 'rspec'
