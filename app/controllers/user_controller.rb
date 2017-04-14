@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  get '/login' do #login request
+  get '/login' do #login request; redirects logged in users, otherwise renders login page
     if logged_in?
       @user = User.find(session[:user_id])
       redirect "/users/#{@user.slug}"
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
-    erb :"/users/new_user"
+    logged_in? ? (redirect '/') : (erb :"/users/new_user")
   end
 
   post '/login' do #handles login submission form. Rejects empty or unauthorized password/username combos.
