@@ -1,6 +1,14 @@
 <%if logged_in?%>
   Welcome, <%=@user.username%>
 
+  <br>
+
+  Click here to log out
+
+  <form action= "/logout" method = "POST">
+  <input type= "submit" value = "Log Out">
+  </form>
+
 <%else%>
 
   Hello! Please sign in or create an account.
