@@ -5,7 +5,7 @@
   <p>Here's a list to get you started</p>
   <%BookScraper.scrape%>
   <%BookScraper.all.each.with_index(1) do |book,index|%>
-  <%="#{index}. #{book}"%>
+  <%="#{index}. #{book}" %> <br> <!--<br>, not \n-->
   <%end%>
 
   <br> <!--perhaps list user's books here and add option to create/modify below -->
