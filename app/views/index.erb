@@ -1,8 +1,14 @@
 <%if logged_in?%>
-  <%=Welcome, "#{current_user}!"%>
-  [scrape booklist here]
+  Welcome, <%="#{current_user}!"%>
+
 <%else%>
 
   Hello! Please sign in or create an account.
 
-  <form action= "/signup" method = "POST">
+  Click here to log in
+
+  <form action= "/login" method = "GET">
+  <input type= "submit" value = "Log in">
+  </form>
+
+<%end%>
