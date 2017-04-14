@@ -19,15 +19,15 @@ class UsersController < ApplicationController
     end
   end
 
-  post '/signup' do #signs up a user with valid
-    redirect '/signup' if required_field_empty? || invalid_password? #|| if username_exists?
+  post '/signup' do #signs up a user with valid username and password if username doesn't already exist. Doesn't check email validity; outside the scope of lab.
+    redirect '/signup' if required_field_empty? || invalid_password? || existing_username?
     @user = User.create(params)
     session[:user_id] = @user.id
     redirect "/users/userpage"
   end
 
   get "/users/:slug" do #finds user by slug and renders userpage
-    @user = find_by_slug(params[:slug])
+    @user = User.find_by_slug(params[:slug])
     erb :"/users/userpage"
   end
 
