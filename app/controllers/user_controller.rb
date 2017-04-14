@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
 
   get '/login' do #login request
-    erb :"/users/login"
+    if logged_in?
+      @user = User.find(session[:user_id])
+      redirect "/users/#{@user.slug}"
+    else
+      (erb :"/users/login")
+    end
   end
 
   get '/signup' do
@@ -20,15 +25,13 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do #signs up a user with valid username and password if username doesn't already exist. Doesn't check email validity; outside the scope of lab.
-    binding.pry
     redirect '/signup' if required_field_empty? || invalid_password? || existing_username?
     @user = User.create(params)
     session[:user_id] = @user.id
-    redirect "/users/#{@user.slug}"
+    redirect "/users/#{@user.slug}" #redirects to user's page
   end
 
   get "/users/:slug" do #finds user by slug and renders userpage
-    binding.pry
     @user = User.find_by_slug(params[:slug])
     erb :"/users/userpage"
   end
