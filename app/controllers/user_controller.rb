@@ -31,6 +31,11 @@ class UsersController < ApplicationController
     redirect "/users/#{@user.slug}" #redirects to user's page
   end
 
+  post '/logout' do
+    session.clear
+    redirect '/'
+  end
+
   get "/users/:slug" do #finds user by slug and renders userpage
     @user = User.find_by_slug(params[:slug])
     erb :"/users/userpage"
