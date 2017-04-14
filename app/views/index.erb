@@ -1,1 +1,8 @@
-this is an index
+<%if logged_in?%>
+  <%=Welcome, "#{current_user}!"%>
+  [scrape booklist here]
+<%else%>
+
+  Hello! Please sign in or create an account.
+
+  <form action= "/signup" method = "POST">
