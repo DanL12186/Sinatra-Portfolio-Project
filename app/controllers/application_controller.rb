@@ -25,5 +25,14 @@ class ApplicationController < Sinatra::Base
     def required_field_empty?
       params.any? {|param| param[1].empty?}
     end
+
+    def invalid_password?
+      password = params[:password]
+      password.length < 10 || !password.include?(/[A-Z]/) || !password.include?(/[\d]/) || !password.include?(/[~!()}\$@\#{%^&*]/)
+    end
+
+    def existing_username?
+      User.all.include?(params[:username])
+    end
   end
 end
