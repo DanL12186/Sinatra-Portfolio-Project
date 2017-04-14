@@ -1,5 +1,5 @@
 <%if logged_in?%>
-  Welcome, <%="#{current_user}!"%>
+  Welcome, <%=@user.username%>
 
 <%else%>
 
@@ -9,6 +9,12 @@
 
   <form action= "/login" method = "GET">
   <input type= "submit" value = "Log in">
+  </form>
+
+  Click here to sign up
+
+  <form action= "/signup" method = "GET">
+  <input type= "submit" value = "Sign Up">
   </form>
 
 <%end%>
