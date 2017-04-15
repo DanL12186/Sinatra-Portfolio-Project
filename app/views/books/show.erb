@@ -1,0 +1,12 @@
+</h2>All of your books in one place!</h2>
+
+<% unless @user.books.empty? %>
+  <% @user.books.each do |book| %>
+    <%= book.title %> <br>
+    <%= book.author %> <br>
+    <br>
+  <%end%>
+<%end%>
+
+<a href= "/new_book">Create a new book</a>
+<a href= "/books/edit">Edit a book</a>
