@@ -4,10 +4,15 @@ Welcome, <%=@user.username%><br>
 <a href= "/new_book">Create a new book</a>
 
 <br><br>
-<% unless @user.books.empty? %>
-  <% @user.books.each do |book| %>
-    <%= book.title %> <br>
-    <%= book.author %> <br>
+<h3> Here are a couple of your books! </h3>
+
+<% unless @user.books.empty? %> <!-- this got messy pretty fast.. probably wasn't worth the time -->
+  <% sample_list = [] %>
+  <% sample_list << @user.books.all.sample(3) %>
+  <% sample_list.uniq.each do |book| %>
+    <%= book[0].title %> <br>
+    <%= book[0].author %> <br>
+    <% sample_list.shift %>
     <br>
   <%end%>
 <%end%>
