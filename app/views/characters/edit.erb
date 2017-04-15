@@ -1,0 +1,10 @@
+<h1>Edit character</h1>
+
+<h2>Belongs to: <%=@character.book.title%></h2>
+<h2>Character Name: <%=@character.name%></h2><br>
+
+<form method="POST" action="/characters/<%=@character.id%>/edit">
+  <h3>Character's Book: <input type= "text" name="title"></h3>
+  <h3>Character Name: <input type="text" name="name"></h3>
+  <input type="submit" value="Edit Character">
+</form>
