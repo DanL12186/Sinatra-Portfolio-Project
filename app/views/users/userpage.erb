@@ -1,4 +1,17 @@
-Welcome, <%=@user.username%>
+Welcome, <%=@user.username%><br>
+<br>
+
+<a href= "/new_book">Create a new book</a>
+
+<br><br>
+<% unless @user.books.empty? %>
+  <% @user.books.each do |book| %>
+    <%= book.title %> <br>
+    <%= book.author %> <br>
+    <br>
+  <%end%>
+<%end%>
+<br>
 
 Click here to log out
 
