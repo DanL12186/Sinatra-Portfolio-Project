@@ -4,7 +4,12 @@
 <h2>Character Name: <%=@character.name%></h2><br>
 
 <form method="POST" action="/characters/<%=@character.id%>/edit">
-  <h3>Character's Book: <input type= "text" name="title"></h3>
   <h3>Character Name: <input type="text" name="name"></h3>
+  <br>
+  <h3>Select the book this character belongs to: </h3>
+
+  <% current_user.books.each do |book| %>
+    <input type="radio" value="<%= book.id %>" name="book_id"><%= book.title%><br>
+  <%end%> <br>
   <input type="submit" value="Edit Character">
 </form>
