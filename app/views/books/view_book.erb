@@ -1,0 +1,8 @@
+<h2><%=@book.title%></h2>
+<h3><%="(by " + @book.author%>)<br></h3>
+
+<h3>Characters: </h3>
+<%@book.characters.each do |char| %>
+  <%= char.name%>
+  <a href= "/characters/<%=char.id%>/edit"> (Edit)</a><br>
+<%end%>
