@@ -26,4 +26,12 @@ class CharactersController < ApplicationController
     @character.update(name: params[:name], book_id: params[:book_id])
     redirect 'characters/show'
   end
+
+  delete '/characters/:id/delete' do
+    @character = Character.find(params[:id])
+    book_id = @character.book_id
+    @character.delete
+    redirect '/books/#{book_id}/view_book'
+  end
+
 end
