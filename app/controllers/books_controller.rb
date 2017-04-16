@@ -24,10 +24,25 @@ class BooksController < ApplicationController
     erb :'/books/edit'
   end
 
-  post '/books/:id/edit' do
+  get '/books/:id/view_book' do
     @book = Book.find(params[:id])
-    redirect "/books/#{@book.id}/edit" if params[:author].empty? || params[:id].empty?
+    erb :'/books/view_book'
+  end
+
+  post '/books/:id/edit' do #handles book editing
+    @book = Book.find(params[:id])
+    redirect "/books/#{@book.id}/edit" if params[:author].empty? || params[:id].empty? #made necessary by empty splat param
     @book.update(title: params[:title], author: params[:author])
     redirect "/books/show"
   end
+
+  delete '/books/:id/delete' do #deletes all characters associated with a book, then deletes book.
+    @book = Book.find(params[:id])
+    @book.characters.each do |char|
+      char.delete
+    end
+    @book.delete
+    redirect "/books/show"
+  end
+
 end
