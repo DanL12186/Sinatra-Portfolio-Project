@@ -14,4 +14,16 @@ class CharactersController < ApplicationController
     erb :'/characters/show'
   end
 
+  get '/characters/:id/edit' do
+    @character = Character.find(params[:id])
+    erb :'/characters/edit'
+  end
+
+  post '/characters/:id/edit' do
+    @character = Character.find(params[:id])
+    binding.pry
+    redirect "/books/#{@book.id}/edit" if params[:name].empty? || params[:book_id].empty?
+    @character.update(name: params[:name], book_id: params[:book_id])
+    redirect 'characters/show'
+  end
 end
