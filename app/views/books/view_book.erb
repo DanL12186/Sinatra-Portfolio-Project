@@ -1,8 +1,14 @@
-<h2><%=@book.title%></h2>
-<h3><%="(by " + @book.author%>)<br></h3>
-
-<h3>Characters: </h3>
+<h1><%=@book.title%></h1>
+<h3>(<%="by " + @book.author%>)</h3>
+<br>
+<h2>Characters: </h2>
 <%@book.characters.each do |char| %>
   <%= char.name%>
   <a href= "/characters/<%=char.id%>/edit"> (Edit)</a><br>
+
+  <form action="/characters/<%=char.id%>/delete" method = "POST"> <!--delete button-->
+    <input id="hidden" type="hidden" name="_method" value="delete"><br>
+    <input type="submit" id="delete" value="Delete <%=char.name%>"><br>
+  </form><br>
 <%end%>
+<a href="/books/show">Back to books</a>
