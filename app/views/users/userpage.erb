@@ -1,10 +1,11 @@
 Welcome, <%=@user.username%><br>
 <br>
 
-<a href= "/new_book">Create a new book</a>
+<a href= "/new_book">Create a new book</a> <br>
+<a href= "/books/show">View all your books</a>
 
 <br><br>
-<h3> Here are a couple of your books! </h3>
+<h3> Here's one of your books! </h3>
 
 <% unless @user.books.empty? %> <!-- this got messy pretty fast.. probably wasn't worth the time -->
   <% sample_list = [] %>
