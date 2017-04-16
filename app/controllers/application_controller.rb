@@ -22,6 +22,12 @@ class ApplicationController < Sinatra::Base
     def logged_in?
       !!session[:user_id]
     end
+    
+    def redirect_if_not_logged_in
+      if !logged_in?
+        redirect "/login?error=You have to be logged in to do that"
+      end
+    end
 
     def required_field_empty?
       params.any? {|param| param[1].empty?} #this can get snagged on an empty splat.
