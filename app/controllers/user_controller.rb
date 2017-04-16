@@ -16,8 +16,8 @@ class UsersController < ApplicationController
   post '/login' do #handles login submission form. Rejects empty or unauthorized password/username combos.
     redirect '/login' if required_field_empty?
     @user = User.find_by(username: params[:username])
-    if @user
-      session[:user_id] = @user.id if @user.authenticate(params[:password])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
       redirect "/users/#{@user.slug}"
     else
       redirect '/login'
