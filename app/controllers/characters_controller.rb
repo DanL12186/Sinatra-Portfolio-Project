@@ -31,7 +31,7 @@ class CharactersController < ApplicationController
     @character = Character.find(params[:id])
     book_id = @character.book_id
     @character.delete
-    redirect '/books/#{book_id}/view_book'
+    redirect "/books/#{book_id}/view_book"
   end
 
 end
