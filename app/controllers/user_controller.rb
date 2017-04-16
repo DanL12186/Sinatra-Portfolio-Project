@@ -14,18 +14,18 @@ class UsersController < ApplicationController
   end
 
   post '/login' do #handles login submission form. Rejects empty or unauthorized password/username combos.
-    redirect '/login' if required_field_empty?
+    redirect '/login?error=Please fill in all fields' if required_field_empty?
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect "/users/#{@user.slug}"
     else
-      redirect '/login'
+      redirect "/login?error=User_authenication_failed"
     end
   end
 
-  post '/signup' do #signs up a user with valid username and password if username doesn't already exist. Doesn't check email validity; outside the scope of lab.
-    redirect '/signup' if required_field_empty? || invalid_password? || existing_username?
+  post '/signup' do #signup user with valid username/pwd if username doesn't already exist. Doesn't check email validity; outside scope of lab.
+    redirect '/signup?error=Please_fill_out_all_fields_and_use_valid_password' if required_field_empty? || invalid_password? || existing_username?
     @user = User.create(params)
     session[:user_id] = @user.id
     redirect "/users/#{@user.slug}" #redirects to user's page
@@ -36,9 +36,9 @@ class UsersController < ApplicationController
     redirect '/'
   end
 
-  get "/users/:slug" do #finds user by slug and renders userpage
+  get "/users/:slug" do #finds user by slug and renders userpage, unless user unauthorized
     @user = User.find_by_slug(params[:slug])
-    erb :"/users/userpage"
+    session[:user_id] == @user.id ? (erb :"/users/userpage") : (redirect_if_not_logged_in)
   end
 
 end
