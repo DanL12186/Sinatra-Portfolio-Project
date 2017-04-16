@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    @user = User.find(session[:user_id]) unless session[:user_id] == nil #Not sure why this unless-user-nil check is necessary, but crashes w/o it.
+    @user = User.find(session[:user_id]) unless session[:user_id] == nil #Not sure why this unless-user-nil check is necessary; crashes w/o it.
     erb :index
   end
 
@@ -24,7 +24,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def required_field_empty?
-      params.any? {|param| param[1].empty?}
+      params.any? {|param| param[1].empty?} #this can get snagged on an empty splat.
     end
 
     def invalid_password? #ensures user entered an alphanumeric mixed-case pwd with a symbol. If this returns true, page will reload without explanation.
