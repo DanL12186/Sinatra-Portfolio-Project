@@ -8,7 +8,7 @@
     <%= "by " + book.author %>
     <br>
     <br>
-    Most recently added: <%= book.characters.last.name %>
+    Most recently added: <%= book.characters.first ? book.characters.last.name : "None yet!"%>
     <form action="/books/<%=book.id%>/delete" method = "POST"> <!--delete button-->
       <input id="hidden" type="hidden" name="_method" value="delete">
       <input type="submit" id="delete" value="Delete Book"><br>

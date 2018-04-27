@@ -8,3 +8,4 @@ use Rack::MethodOverride
 run ApplicationController
 use BooksController
 use CharactersController
+use UsersController
