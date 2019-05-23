@@ -39,7 +39,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def existing_username?
-      User.all.include?(params[:username])
+      !!User.find_by(params[:username])
     end
   end
 end
