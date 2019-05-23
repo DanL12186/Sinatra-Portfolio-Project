@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    @user = User.find(session[:user_id]) unless session[:user_id] == nil #Not sure why this unless-user-nil check is necessary; crashes w/o it.
+    @user = User.find_by(session[:user_id])
     erb :index
   end
 
